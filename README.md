@@ -1,8 +1,8 @@
 ﻿# Nexel Ai
 
-Nexel Ai is the public website for the Nexel product. It is a React + Vite frontend designed for Netlify hosting.
+Nexel Ai is the public company website for the Nexel product. It is a React + Vite frontend designed for Netlify hosting.
 
-The signed-in workspace is branded as Nexel Chat and should connect to the separate API/backend repo:
+The signed-in GPT workspace is not in this repo. It lives in the separate Nexel Chat repo:
 
 https://github.com/NexelAi-Inc/Nexel-Chat
 
@@ -35,8 +35,7 @@ Publish directory: web/dist
 Set these environment variables in Netlify:
 
 ```text
-VITE_API_BASE_URL=https://your-nexel-chat-api-host.example.com
-VITE_FIREBASE_DATABASE_URL=https://nexel-ai-default-rtdb.firebaseio.com
+VITE_NEXEL_CHAT_URL=https://your-nexel-chat-site.example.com
 ```
 
-If `VITE_API_BASE_URL` is blank, the app will call same-origin API routes, which only works when the frontend and API are hosted together.
+If `VITE_NEXEL_CHAT_URL` is blank, the company site links to the Nexel Chat GitHub repo.
