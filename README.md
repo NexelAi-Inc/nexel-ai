@@ -38,4 +38,4 @@ Set these environment variables in Netlify:
 VITE_NEXEL_CHAT_URL=https://your-nexel-chat-site.example.com
 ```
 
-If `VITE_NEXEL_CHAT_URL` is blank, the company site links to the Nexel Chat GitHub repo.
+Set `VITE_NEXEL_CHAT_URL` to your deployed Nexel Chat workspace URL. The company site's `Log in`, `Try Nexel Chat`, and workspace links use that value.

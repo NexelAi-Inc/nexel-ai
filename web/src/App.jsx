@@ -1,104 +1,104 @@
 const CHAT_URL = import.meta.env.VITE_NEXEL_CHAT_URL || "https://github.com/NexelAi-Inc/Nexel-Chat";
 
-const features = [
+const navItems = ["Research", "Products", "Business", "Developers", "Company", "Foundation"];
+
+const sideStories = [
   {
-    title: "Nexel Chat",
-    text: "A separate GPT-style workspace for writing, coding, reasoning, and long-running conversations.",
+    eyebrow: "Product",
+    title: "Nexel Chat for almost everything",
+    read: "4 min read",
+    variant: "blue",
   },
   {
-    title: "Private accounts",
-    text: "Firebase-backed sign in keeps the product ready for user profiles, personalization, and saved sessions.",
-  },
-  {
-    title: "Deployable stack",
-    text: "The website can live on Netlify while the chat workspace and API live in their own repository.",
+    eyebrow: "Research",
+    title: "Memory, routing, and safer assistant workflows",
+    read: "7 min read",
+    variant: "green",
   },
 ];
 
-const roadmap = ["Company website", "Nexel Chat workspace", "User memory", "Smart routing"];
+const updates = [
+  "Nexel Chat workspace moves into its own product repo.",
+  "Nexel Ai company website is ready for Netlify hosting.",
+  "Firebase accounts and profile sync are connected to the chat workspace.",
+];
 
 export default function App() {
   return (
     <main className="company-page">
-      <nav className="site-nav">
-        <a className="brand" href="#top" aria-label="Nexel Ai home">
-          <span className="brand-mark">N</span>
-          <span>Nexel Ai</span>
+      <header className="site-header">
+        <a className="wordmark" href="#top" aria-label="Nexel Ai home">
+          Nexel Ai
         </a>
-        <div className="nav-links">
-          <a href="#platform">Platform</a>
-          <a href="#roadmap">Roadmap</a>
-          <a href={CHAT_URL}>Nexel Chat</a>
-        </div>
-      </nav>
 
-      <section id="top" className="hero-section">
-        <div className="hero-copy">
-          <p className="eyebrow">Nexel Ai Company</p>
-          <h1>The home for Nexel Ai products.</h1>
-          <p className="hero-text">
-            Nexel Ai is the company website. Nexel Chat is the separate assistant workspace
-            where users sign in, talk with the AI, and keep their conversations moving.
+        <nav className="site-nav" aria-label="Main navigation">
+          {navItems.map((item) => (
+            <a key={item} href={`#${item.toLowerCase()}`}>
+              {item}
+            </a>
+          ))}
+          <button className="search-button" type="button" aria-label="Search">
+            Search
+          </button>
+        </nav>
+
+        <div className="header-actions">
+          <a className="login-link" href={CHAT_URL}>
+            Log in
+          </a>
+          <a className="try-chat-link" href={CHAT_URL}>
+            Try Nexel Chat
+          </a>
+        </div>
+      </header>
+
+      <section id="top" className="news-layout">
+        <article className="featured-story">
+          <div className="feature-art">
+            <div className="glow glow-one" />
+            <div className="glow glow-two" />
+            <div className="feature-label">Nexel Chat</div>
+          </div>
+          <h1>Introducing Nexel Chat</h1>
+          <p className="story-meta">
+            <span>Product</span>
+            <span>10 min read</span>
           </p>
-          <div className="hero-actions">
-            <a className="primary-link" href={CHAT_URL}>
-              Open Nexel Chat
-            </a>
-            <a className="secondary-link" href="#platform">
-              Learn more
-            </a>
-          </div>
-        </div>
+        </article>
 
-        <div className="hero-card" aria-label="Nexel product split">
-          <div className="card-header">
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="split-card">
-            <div>
-              <p className="label">Website</p>
-              <h2>Nexel Ai</h2>
-              <p>Brand, product story, company updates, and public pages.</p>
-            </div>
-            <div>
-              <p className="label">Workspace</p>
-              <h2>Nexel Chat</h2>
-              <p>Protected GPT-style assistant, memory, and backend API.</p>
-            </div>
-          </div>
-        </div>
+        <aside className="story-column">
+          {sideStories.map((story) => (
+            <article className="side-story" key={story.title}>
+              <div className={`side-art ${story.variant}`}>
+                <span>{story.title}</span>
+              </div>
+              <h2>{story.title}</h2>
+              <p className="story-meta">
+                <span>{story.eyebrow}</span>
+                <span>{story.read}</span>
+              </p>
+            </article>
+          ))}
+        </aside>
       </section>
 
-      <section id="platform" className="feature-section">
-        <div className="section-heading">
-          <p className="eyebrow">Platform</p>
-          <h2>One company site. One focused chat product.</h2>
+      <section id="products" className="updates-section">
+        <div>
+          <p className="section-kicker">Latest</p>
+          <h2>Building Nexel as two connected products.</h2>
         </div>
-        <div className="feature-grid">
-          {features.map((feature) => (
-            <article className="feature-card" key={feature.title}>
-              <h3>{feature.title}</h3>
-              <p>{feature.text}</p>
+        <div className="updates-list">
+          {updates.map((update) => (
+            <article className="update-item" key={update}>
+              <p>{update}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section id="roadmap" className="roadmap-section">
-        <div>
-          <p className="eyebrow">Roadmap</p>
-          <h2>Built to grow from a clean foundation.</h2>
-        </div>
-        <div className="roadmap-list">
-          {roadmap.map((item, index) => (
-            <div className="roadmap-item" key={item}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <p>{item}</p>
-            </div>
-          ))}
-        </div>
+      <section id="developers" className="developer-band">
+        <p>Nexel Ai hosts the company story. Nexel Chat hosts the signed-in GPT workspace.</p>
+        <a href={CHAT_URL}>Open Nexel Chat</a>
       </section>
     </main>
   );
