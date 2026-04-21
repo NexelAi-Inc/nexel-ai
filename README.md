@@ -2,9 +2,9 @@
 
 Nexel Ai is the public company website for the Nexel product. It is a React + Vite frontend designed for Netlify hosting.
 
-The signed-in GPT workspace is not in this repo. It lives in the separate Nexel Chat repo:
+The signed-in GPT workspace is hosted separately as Nexel Chat:
 
-https://github.com/NexelAi-Inc/Nexel-Chat
+https://nexelchat.netlify.app/
 
 ## Local development
 
@@ -35,7 +35,7 @@ Publish directory: web/dist
 Set these environment variables in Netlify:
 
 ```text
-VITE_NEXEL_CHAT_URL=https://your-nexel-chat-site.example.com
+VITE_NEXEL_CHAT_URL=https://nexelchat.netlify.app/
 ```
 
 Set `VITE_NEXEL_CHAT_URL` to your deployed Nexel Chat workspace URL. The company site's `Log in`, `Try Nexel Chat`, and workspace links use that value.

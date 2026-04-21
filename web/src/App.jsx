@@ -1,4 +1,4 @@
-const CHAT_URL = import.meta.env.VITE_NEXEL_CHAT_URL || "https://github.com/NexelAi-Inc/Nexel-Chat";
+const CHAT_URL = import.meta.env.VITE_NEXEL_CHAT_URL || "https://nexelchat.netlify.app/";
 
 const navItems = ["Research", "Products", "Business", "Developers", "Company", "Foundation"];
 
