@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object Spinner</title>
+  <style>
+    :root {
+      --bg-top: #f6efe6;
+      --bg-bottom: #dbe7f5;
+      --panel: rgba(255, 255, 255, 0.72);
+      --ink: #1d2b3a;
+      --accent: #1d6fd6;
+      --accent-2: #ef6c43;
+      --shadow: rgba(23, 39, 58, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 35%),
+        linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+    }
+
+    .card {
+      width: min(92vw, 720px);
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 28px;
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 24px 60px var(--shadow);
+    }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      letter-spacing: 0.03em;
+    }
+
+    p {
+      margin: 0 0 1.5rem;
+      line-height: 1.5;
+    }
+
+    .stage {
+      display: grid;
+      place-items: center;
+      min-height: 320px;
+      margin-bottom: 1.5rem;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.35));
+      overflow: hidden;
+    }
+
+    .spinner-shell {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffffff, #dae5f2 68%, #b8c8d9 100%);
+      box-shadow:
+        inset 0 8px 18px rgba(255, 255, 255, 0.95),
+        inset 0 -14px 24px rgba(78, 98, 122, 0.2),
+        0 16px 30px rgba(31, 53, 74, 0.2);
+    }
+
+    .spinner-shell::after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border-radius: 50%;
+      border: 2px dashed rgba(29, 43, 58, 0.12);
+    }
+
+    .spinner-object {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      transform-origin: center;
+      transition: filter 180ms ease;
+    }
+
+    .spinner-object.running {
+      animation: orbit 1.8s linear infinite;
+    }
+
+    .spinner-object::before,
+    .spinner-object::after {
+      content: "";
+      position: absolute;
+      border-radius: 18px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .spinner-object::before {
+      width: 120px;
+      height: 42px;
+      background: linear-gradient(90deg, var(--accent), #70b2ff);
+      box-shadow: 0 8px 20px rgba(29, 111, 214, 0.28);
+    }
+
+    .spinner-object::after {
+      width: 42px;
+      height: 120px;
+      background: linear-gradient(180deg, var(--accent-2), #ffb069);
+      box-shadow: 0 8px 20px rgba(239, 108, 67, 0.22);
+    }
+
+    .hub {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #213345, #101820);
+      inset: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.55);
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.85rem 1.2rem;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .start {
+      color: white;
+      background: linear-gradient(135deg, #1b8c5d, #31c48d);
+      box-shadow: 0 12px 22px rgba(49, 196, 141, 0.25);
+    }
+
+    .stop {
+      color: white;
+      background: linear-gradient(135deg, #bb3f3f, #ef6c43);
+      box-shadow: 0 12px 22px rgba(239, 108, 67, 0.25);
+    }
+
+    .status {
+      margin-left: auto;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(29, 43, 58, 0.08);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 1.25rem;
+      }
+
+      .stage {
+        min-height: 260px;
+      }
+
+      .spinner-shell {
+        width: 190px;
+        height: 190px;
+      }
+
+      .spinner-object {
+        width: 100px;
+        height: 100px;
+      }
+
+      .spinner-object::before {
+        width: 100px;
+      }
+
+      .spinner-object::after {
+        height: 100px;
+      }
+
+      .controls {
+        align-items: stretch;
+      }
+
+      .status {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Object Spinner</h1>
+    <p>Start and stop the spinning object with the buttons below.</p>
+
+    <section class="stage" aria-label="Spinner demo">
+      <div class="spinner-shell">
+        <div id="spinnerObject" class="spinner-object" aria-live="polite" aria-label="Spinner stopped">
+          <div class="hub"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="controls">
+      <button id="startButton" class="start" type="button">Start</button>
+      <button id="stopButton" class="stop" type="button">Stop</button>
+      <div id="statusText" class="status">Stopped</div>
+    </div>
+  </main>
+
+  <script>
+    const spinnerObject = document.getElementById("spinnerObject");
+    const startButton = document.getElementById("startButton");
+    const stopButton = document.getElementById("stopButton");
+    const statusText = document.getElementById("statusText");
+
+    function setRunningState(isRunning) {
+      spinnerObject.classList.toggle("running", isRunning);
+      spinnerObject.setAttribute(
+        "aria-label",
+        isRunning ? "Spinner running" : "Spinner stopped"
+      );
+      statusText.textContent = isRunning ? "Running" : "Stopped";
+    }
+
+    startButton.addEventListener("click", () => setRunningState(true));
+    stopButton.addEventListener("click", () => setRunningState(false));
+  </script>
+</body>
+</html>

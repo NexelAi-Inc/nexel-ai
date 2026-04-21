@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+data/
+models/
+.tmp/
+.cuda-extract/
+web/node_modules/
+web/dist/
+node_modules/
+dist/
+build/
+*.log
+*.vsix

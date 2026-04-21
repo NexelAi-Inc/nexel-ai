@@ -1,0 +1,18 @@
+# Core runtime
+# Optional GGUF backend on Windows. Install separately if you want llama.cpp.
+# llama-cpp-python>=0.2.90
+
+# Optional HF backend (larger memory/GPU requirements)
+transformers>=4.41.0
+accelerate>=0.30.0
+torch>=2.2.0
+huggingface_hub>=0.23.0
+
+# Agent utilities
+chromadb>=0.5.0
+sentence-transformers>=2.7.0
+python-dotenv>=1.0.1
+
+# Local API backend
+fastapi>=0.115.0
+uvicorn>=0.30.0
